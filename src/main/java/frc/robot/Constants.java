@@ -16,7 +16,33 @@ public final class Constants {
 
     public final static class JoystickConstants{
 
-        public final static int rightBumper = 0;
+         public final static int mainJoystick = 0;
+         //public final static int secondaryJoystick = 0; //This is optional
+
+
+        
+        public final static int leftJoystickY = 1;
+        public final static int leftJoystickX = 2;
+        public final static int rightJoystickX = 3;
+        public final static int rightJoystickY = 4;
+        public final static int dpadHorizontal = 5;
+        public final static int dpadVertical = 6;
+
+
+
+        public final static int buttonX = 1;
+        public final static int buttonA = 2;
+        public final static int buttonB = 3;
+        public final static int buttonY = 4;
+        public final static int leftBumper = 5; //TODO Actually put in ports for the joystick
+        public final static int rightBumper = 6;
+        public final static int leftTrigger = 7;
+        public final static int rightTrigger = 8;
+        public final static int leftJoystickButton = 0;
+        public final static int rightJoystickButton = 0;
+        
+        
+
     }
     public final static class DriveConstants{
         //TODO set ports
