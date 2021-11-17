@@ -4,9 +4,13 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
+
+import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
@@ -18,6 +22,13 @@ public class DriveSubsystem extends SubsystemBase {
   private TalonFX backLeftMotor = new TalonFX(DriveConstants.BackLeftMotorPort);
   private TalonFX frontRightMotor = new TalonFX(DriveConstants.FrontRightMotorPort);
   private TalonFX backRightMotor = new TalonFX(DriveConstants.BackRightMotorPort);
+
+  private Gyro gyro = new ADXRS450_Gyro();
+  sim
+
+  public void arcadeDrive(DoubleSupplier fwd, DoubleSupplier rot){
+    //TODO do the arcade drive
+  }
 
 
   

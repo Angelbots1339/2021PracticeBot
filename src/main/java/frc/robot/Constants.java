@@ -45,7 +45,7 @@ public final class Constants {
 
     }
     public final static class DriveConstants{
-        //TODO set ports
+        //TODO set motor ports
         public final static int FrontLeftMotorPort = 0; 
         public final static int BackLeftMotorPort = 0; 
         public final static int FrontRightMotorPort = 0; 
