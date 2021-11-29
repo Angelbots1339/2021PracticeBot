@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.util.Units;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -44,12 +46,38 @@ public final class Constants {
         
 
     }
+    /**
+     * All units in meters 
+     */
     public final static class DriveConstants{
+        //Motor ports
         //TODO set motor ports
-        public final static int FrontLeftMotorPort = 0; 
-        public final static int BackLeftMotorPort = 0; 
-        public final static int FrontRightMotorPort = 0; 
-        public final static int BackRightMotorPort = 0; 
+        public final static int leftMotorTopPort = 0; 
+        public final static int leftMotorFrontPort = 0; 
+        public final static int leftMotorBackPort = 0; 
+        public final static int rightMotorTopPort = 0; 
+        public final static int rightMotorFrontPort = 0; 
+        public final static int rightMotorBackPort = 0; 
+        
+        //Drive base values
+        public final static double trackWidth = 0; //TODO
+        public final static double wheelDiameter = Units.inchesToMeters(4);
+        public final static double wheelRotPerMotorRot = 6.06;
+
+        //PID 
+        public final static double leftKP = 0.01;
+        public final static double rightKP = 0.01;
+
+        //Motion profiling
+        //TODO motion profile robot
+        public final static double ks = 0; 
+        public final static double kv = 0; 
+        public final static double ka = 0; 
+
+    }
+    public final static class AutonomousConstants{
+        public final static double maxVelocityMetersPerSecond = Units.feetToMeters(2);
+        public final static double maxAccelerationMetersPerSecondSq = Units.feetToMeters(2);
 
     }
 

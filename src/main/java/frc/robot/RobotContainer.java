@@ -4,17 +4,24 @@
 
 package frc.robot;
 
+import java.util.Arrays;
 import java.util.Set;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.commands.DriveCommand;
+import edu.wpi.first.wpilibj.controller.RamseteController;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import static frc.robot.Constants.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -25,11 +32,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   private final Joystick m_Joystick = new Joystick(Constants.JoystickConstants.mainJoystick);
-
-  
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -39,9 +44,8 @@ public class RobotContainer {
     configureButtonBindings();
 
     m_driveSubsystem.setDefaultCommand(new RunCommand(
-        () -> m_driveSubsystem.arcadeDrive(
-          () -> m_Joystick.getRawAxis(Constants.JoystickConstants.leftJoystickY),
-          () -> m_Joystick.getRawAxis(Constants.JoystickConstants.leftJoystickX)),
+        () -> m_driveSubsystem.arcadeDrive(() -> m_Joystick.getRawAxis(Constants.JoystickConstants.leftJoystickY),
+            () -> m_Joystick.getRawAxis(Constants.JoystickConstants.leftJoystickX)),
         m_driveSubsystem));
   }
 
@@ -52,8 +56,7 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
-    
+
   }
 
   /**
@@ -61,8 +64,22 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  // public Command getAutonomousCommand() {
-  //   // An ExampleCommand will run in autonomous
-    
-  // }
+  public Command getAutonomousCommand() {
+    // Simple path following auto
+    TrajectoryConfig config = new TrajectoryConfig(AutonomousConstants.maxVelocityMetersPerSecond,
+        AutonomousConstants.maxAccelerationMetersPerSecondSq);
+    config.setKinematics(m_driveSubsystem.getKinematics());
+
+    // simple trajectory that moves 1 meter forward
+    Trajectory trajectory = TrajectoryGenerator
+        .generateTrajectory(Arrays.asList(new Pose2d(), new Pose2d(1, 0, new Rotation2d())), config);
+
+    RamseteCommand command = new RamseteCommand(trajectory, m_driveSubsystem::getPose, new RamseteController(2, 0.7),
+        m_driveSubsystem.getFeedforward(), m_driveSubsystem.getKinematics(), m_driveSubsystem::getWheelSpeeds,
+        m_driveSubsystem.getLeftPid(), m_driveSubsystem.getRightPid(), m_driveSubsystem::tankDriveVolts,
+        m_driveSubsystem);
+
+    return command;
+
+  }
 }
