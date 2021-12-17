@@ -1,7 +1,6 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -45,22 +44,20 @@ public class DriveSubsystem extends SubsystemBase {
   private PIDController leftPID = new PIDController(DriveConstants.leftKP, 0, 0);
   private PIDController rightPID = new PIDController(DriveConstants.rightKP, 0, 0);
 
-  private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(1, 1, 1);// TODO add constats ks, kv, ka
+  private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(DriveConstants.ks, DriveConstants.kv, DriveConstants.ka);
 
-  private Pose2d pose;
+  private Pose2d pose = new Pose2d();
 
-  private DifferentialDriveKinematics m_DriveKinematics = new DifferentialDriveKinematics(DriveConstants.trackWidth);// TODO
-                                                                                                                     // constant
-                                                                                                                     // for
-                                                                                                                     // track
-                                                                                                                     // width
-  private DifferentialDriveOdometry m_DriveOdometry;
+  private DifferentialDriveKinematics m_DriveKinematics = new DifferentialDriveKinematics(DriveConstants.trackWidth);
+                                                                                                                     
+  private DifferentialDriveOdometry m_DriveOdometry = new DifferentialDriveOdometry(new Rotation2d(), pose);
 
   private AnalogGyro gyro = new AnalogGyro(0);// TODO add Constants
 
   public DriveSubsystem() {
-
+      
   }
+  
 
   /**
    * Drives the robot using arcade controls. Intend use for inline command reason
@@ -123,12 +120,12 @@ public class DriveSubsystem extends SubsystemBase {
             * Math.PI / 60);
   }
 
-  @Override
+ @Override
   public void periodic() {
     pose = m_DriveOdometry.update(getHeading(), getDistanceRight(), getDistanceLeft());
   }
 
-  // Getters
+  //Getters
   public SimpleMotorFeedforward getFeedforward() {
     return feedforward;
   }

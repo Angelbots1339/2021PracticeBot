@@ -45,7 +45,7 @@ public class RobotContainer {
 
     m_driveSubsystem.setDefaultCommand(new RunCommand(
         () -> m_driveSubsystem.arcadeDrive(() -> m_Joystick.getRawAxis(Constants.JoystickConstants.leftJoystickY),
-            () -> m_Joystick.getRawAxis(Constants.JoystickConstants.leftJoystickX)),
+            () -> m_Joystick.getRawAxis(Constants.JoystickConstants.rightJoystickX)),
         m_driveSubsystem));
   }
 
@@ -66,20 +66,25 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // Simple path following auto
-    TrajectoryConfig config = new TrajectoryConfig(AutonomousConstants.maxVelocityMetersPerSecond,
-        AutonomousConstants.maxAccelerationMetersPerSecondSq);
-    config.setKinematics(m_driveSubsystem.getKinematics());
+    // TrajectoryConfig config = new
+    // TrajectoryConfig(AutonomousConstants.maxVelocityMetersPerSecond,
+    // AutonomousConstants.maxAccelerationMetersPerSecondSq);
+    // config.setKinematics(m_driveSubsystem.getKinematics());
 
-    // simple trajectory that moves 1 meter forward
-    Trajectory trajectory = TrajectoryGenerator
-        .generateTrajectory(Arrays.asList(new Pose2d(), new Pose2d(1, 0, new Rotation2d())), config);
+    // // simple trajectory that moves 1 meter forward
+    // Trajectory trajectory = TrajectoryGenerator
+    // .generateTrajectory(Arrays.asList(new Pose2d(), new Pose2d(1, 0, new
+    // Rotation2d())), config);
 
-    RamseteCommand command = new RamseteCommand(trajectory, m_driveSubsystem::getPose, new RamseteController(2, 0.7),
-        m_driveSubsystem.getFeedforward(), m_driveSubsystem.getKinematics(), m_driveSubsystem::getWheelSpeeds,
-        m_driveSubsystem.getLeftPid(), m_driveSubsystem.getRightPid(), m_driveSubsystem::tankDriveVolts,
-        m_driveSubsystem);
+    // RamseteCommand command = new RamseteCommand(trajectory,
+    // m_driveSubsystem::getPose, new RamseteController(2, 0.7),
+    // m_driveSubsystem.getFeedforward(), m_driveSubsystem.getKinematics(),
+    // m_driveSubsystem::getWheelSpeeds,
+    // m_driveSubsystem.getLeftPid(), m_driveSubsystem.getRightPid(),
+    // m_driveSubsystem::tankDriveVolts,
+    // m_driveSubsystem);
 
-    return command;
+    return null;
 
   }
 }
