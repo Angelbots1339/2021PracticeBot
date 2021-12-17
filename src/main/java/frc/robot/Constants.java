@@ -50,8 +50,10 @@ public final class Constants {
      * All units in meters 
      */
     public final static class DriveConstants{
+        //general 
+        public final static double maxDriveOutput = 0.5;
+
         //Motor ports
-        //TODO set motor ports
         public final static int leftMotorTopPort = 1; 
         public final static int leftMotorFrontPort = 2; 
         public final static int leftMotorBackPort = 3; 

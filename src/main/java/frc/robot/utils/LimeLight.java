@@ -97,7 +97,7 @@ public class LimeLight {
     }
 
     //Setters
-    private void setEntry(String key, Number value){
+    private static void setEntry(String key, Number value){
         NetworkTableInstance.getDefault().getTable("limelight").getEntry(key).setNumber(value);
     }
     /**
@@ -110,7 +110,7 @@ public class LimeLight {
         <li>3 = force on</li>
     </ul>
      */
-    public void setLEDMode(Integer mode){
+    public static void setLEDMode(Integer mode){
         setEntry(entryType.LED_MODE.toString(), mode);
     }
     /**
@@ -121,14 +121,14 @@ public class LimeLight {
         <li>1 = Driver Camera (Increases exposure, disables vision processing)</li>
     </ul>
      */
-    public void setCamMode(Integer mode){
+    public static void setCamMode(Integer mode){
         setEntry(entryType.CAM_MODE.toString(), mode);
     }
     /**
      * Sets limelight’s LED state
      * @param  pipeline	Select pipeline 0..9
      */
-    public void setPipeline(Integer pipeline){
+    public static void setPipeline(Integer pipeline){
         setEntry(entryType.PIPELINE.toString(), pipeline);
     }
     /**
@@ -140,7 +140,7 @@ public class LimeLight {
         <li>2 = PiP Secondary - The primary camera stream is placed in the lower-right corner of the secondary camera stream</li>
     </ul>
      */
-    public void setStream(Integer stream){
+    public static void setStream(Integer stream){
         setEntry(entryType.STREAM.toString(), stream);
     }
     /**
@@ -151,7 +151,7 @@ public class LimeLight {
         <li>1 = Take two snapshots per second</li>
     </ul>
      */
-    public void snapshot(Integer takeSnapshot){
+    public static void snapshot(Integer takeSnapshot){
         setEntry(entryType.SNAPSHOT.toString(), takeSnapshot);
     }
     

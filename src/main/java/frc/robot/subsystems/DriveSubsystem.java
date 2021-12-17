@@ -55,6 +55,7 @@ public class DriveSubsystem extends SubsystemBase {
   private AnalogGyro gyro = new AnalogGyro(0);// TODO add Constants
 
   public DriveSubsystem() {
+    m_Drive.setMaxOutput(maxOutput);
       
   }
   
